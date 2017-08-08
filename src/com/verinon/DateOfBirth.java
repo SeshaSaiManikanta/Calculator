@@ -1,23 +1,22 @@
 package com.verinon;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.Years;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
 
 public class DateOfBirth {
 
@@ -25,7 +24,8 @@ public class DateOfBirth {
 	private JLabel headerLabel;
 	private JLabel statusLabel;
 	private JPanel controlPanel;
-
+	private JButton submitButton;
+	private JTextField userText;
 	public DateOfBirth() {
 		prepareGUI();
 	}
@@ -34,7 +34,8 @@ public class DateOfBirth {
 		mainFrame = new JFrame("Calculate you AGE");
 		mainFrame.setSize(400, 400);
 		mainFrame.setLayout(new GridLayout(3, 1));
-
+		
+		
 		mainFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
 				System.exit(0);
@@ -59,26 +60,32 @@ public class DateOfBirth {
 		headerLabel.setText("Welcome To AGE Calculator");
 
 		JLabel namelabel = new JLabel("Enter Your DateOfBirth: ", JLabel.RIGHT);
-		final JTextField userText = new JTextField(10);
-
-		JButton submitButton = new JButton("submit");
-		submitButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				String date = "YourAge= "
-						+ /* userText.getText() */calculationLogic(userText);
-				statusLabel.setText(date);
-			}
-		});
+		  userText = new JTextField("yyyy/MM/dd");
+		  userText.setSize(60, 10);
+		
+		String userenterdata=userText.getText();
+		System.out.println(userenterdata);
+		final String agee=calculationLogic(userenterdata);
+		System.out.println(agee);
+		 submitButton = new JButton("submit");
+			submitButton.addActionListener(new ActionListener() {
+			
+				public void actionPerformed(ActionEvent e) {
+					String date = "YourAge= "+agee;
+					statusLabel.setText(date);
+				}
+			});
 		controlPanel.add(namelabel);
 		controlPanel.add(userText);
 		controlPanel.add(submitButton);
 		mainFrame.setVisible(true);
 	}
 
-	private int calculationLogic(JTextField userText) {
-
-		return 0;
+	private String calculationLogic(String fielddata) {
+		System.out.println(fielddata);
+		
+		
+		return fielddata+"some";
 
 	}
 
